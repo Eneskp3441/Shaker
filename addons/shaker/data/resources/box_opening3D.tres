@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="ShakerPreset3D" load_steps=13 format=3 uid="uid://cqfe3012jylqs"]
+
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeCurve3D.gd" id="2_020y4"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeRandom3D.gd" id="3_6s2h2"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="4_ko4ur"]
+
+[sub_resource type="Curve" id="Curve_csfne"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.429245, 0), 0.0, 0.0, 0, 0, Vector2(0.457547, 1), 0.0, 0.0, 0, 0, Vector2(0.787736, 1), 0.0, 0.0, 0, 0, Vector2(0.985849, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="Resource" id="Resource_n7d86"]
+script = ExtResource("2_020y4")
+curve_y = SubResource("Curve_csfne")
+loop = true
+amplitude = Vector3(1, 1, 1)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_c2tfw"]
+script = ExtResource("3_6s2h2")
+seed = 0
+amplitude = Vector3(0.25, 0.25, 0.25)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 5.42787
+start_percent = 0.0
+end_percent = 0.59
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Curve" id="Curve_ioyrx"]
+_data = [Vector2(0.501572, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_1e44d"]
+script = ExtResource("2_020y4")
+curve_y = SubResource("Curve_ioyrx")
+loop = true
+amplitude = Vector3(2, 2, 2)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Curve" id="Curve_01cbm"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0613208, 0.20904), 0.0, 0.0, 0, 0, Vector2(0.143082, 0), 0.0, 0.0, 0, 0, Vector2(0.215409, 0.20904), 0.0, 0.0, 0, 0, Vector2(0.275157, 0), 0.0, 0.0, 0, 0, Vector2(0.429245, 0), 0.0, 0.0, 0, 0, Vector2(0.463836, 1), 0.0, 0.0, 0, 0, Vector2(0.905204, 1), 0.35252, 0.35252, 0, 0, Vector2(0.957249, 0.482796), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 11
+
+[sub_resource type="Curve" id="Curve_uayq1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0613208, 0.20904), 0.0, 0.0, 0, 0, Vector2(0.143082, 0), 0.0, 0.0, 0, 0, Vector2(0.215409, 0.20904), 0.0, 0.0, 0, 0, Vector2(0.275157, 0), 0.0, 0.0, 0, 0, Vector2(0.429245, 0), 0.0, 0.0, 0, 0, Vector2(0.463836, 1), 0.0, 0.0, 0, 0, Vector2(0.905204, 1), 0.35252, 0.35252, 0, 0, Vector2(0.957249, 0.482796), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 11
+
+[sub_resource type="Curve" id="Curve_b6gtf"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0613208, 0.20904), 0.0, 0.0, 0, 0, Vector2(0.143082, 0), 0.0, 0.0, 0, 0, Vector2(0.215409, 0.20904), 0.0, 0.0, 0, 0, Vector2(0.275157, 0), 0.0, 0.0, 0, 0, Vector2(0.429245, 0), 0.0, 0.0, 0, 0, Vector2(0.463836, 1), 0.0, 0.0, 0, 0, Vector2(0.905204, 1), 0.35252, 0.35252, 0, 0, Vector2(0.957249, 0.482796), 0.0, 0.0, 0, 0, Vector2(0.99999, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 11
+
+[sub_resource type="Resource" id="Resource_011mv"]
+script = ExtResource("2_020y4")
+curve_x = SubResource("Curve_01cbm")
+curve_y = SubResource("Curve_uayq1")
+curve_z = SubResource("Curve_b6gtf")
+loop = true
+amplitude = Vector3(0.5, 0.5, 0.5)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[resource]
+script = ExtResource("4_ko4ur")
+PositionShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([SubResource("Resource_n7d86")])
+RotationShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([SubResource("Resource_c2tfw"), SubResource("Resource_1e44d")])
+ScaleShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([SubResource("Resource_011mv")])
+bake_internal = 64
+__follow_timeline = false

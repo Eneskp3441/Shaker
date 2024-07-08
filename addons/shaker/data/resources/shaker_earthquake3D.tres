@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="ShakerPreset3D" load_steps=8 format=3 uid="uid://cvklw5ika1tao"]
+
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="1_d2tua"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="2_pfinc"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeRandom3D.gd" id="3_ghpi8"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="4_trx4m"]
+
+[sub_resource type="Resource" id="Resource_pq027"]
+script = ExtResource("2_pfinc")
+frequency = Vector3(10, 10, 1)
+phase = Vector3(1, 1, 1)
+amplitude = Vector3(0.25, 0.2, 0)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 1e-05
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_won02"]
+script = ExtResource("3_ghpi8")
+seed = 0
+amplitude = Vector3(0.25, 0.25, 0)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.633041
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_twjh4"]
+script = ExtResource("2_pfinc")
+frequency = Vector3(1, 1, 1)
+phase = Vector3(1, 1, 1)
+amplitude = Vector3(0.025, 0, 0.025)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[resource]
+script = ExtResource("4_trx4m")
+PositionShake = Array[ExtResource("1_d2tua")]([SubResource("Resource_pq027"), SubResource("Resource_won02")])
+RotationShake = Array[ExtResource("1_d2tua")]([SubResource("Resource_twjh4")])
+ScaleShake = Array[ExtResource("1_d2tua")]([])
+bake_internal = 64
+__follow_timeline = false

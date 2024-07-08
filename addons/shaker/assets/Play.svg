@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #39b54a;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="m54.72,36.38L14.34,59.7c-3.37,1.95-7.59-.49-7.59-4.38V8.69c0-3.9,4.22-6.33,7.59-4.38l40.38,23.31c3.37,1.95,3.37,6.82,0,8.77Z"/>
+</svg>

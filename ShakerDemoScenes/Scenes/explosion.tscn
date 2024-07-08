@@ -1,0 +1,106 @@
+[gd_scene load_steps=19 format=3 uid="uid://dtihi870qd6x5"]
+
+[ext_resource type="Script" path="res://ShakerDemoScenes/scripts/explosion.gd" id="1_mc416"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/ShakerEmitter3D.gd" id="2_smp1q"]
+[ext_resource type="Resource" uid="uid://dakufr1eoowxf" path="res://addons/shaker/data/resources/strong_shake3D.tres" id="3_3vhcu"]
+
+[sub_resource type="Gradient" id="Gradient_1rife"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ltu1k"]
+gradient = SubResource("Gradient_1rife")
+
+[sub_resource type="Curve" id="Curve_xo8ol"]
+max_value = 1.5
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.187086, 1.15647), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6a2s4"]
+curve = SubResource("Curve_xo8ol")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lgjsd"]
+emission_shape = 1
+emission_sphere_radius = 1.85
+direction = Vector3(0, 1, 0)
+spread = 35.0
+initial_velocity_min = 1.75
+initial_velocity_max = 2.25
+gravity = Vector3(0, -3, 0)
+scale_curve = SubResource("CurveTexture_6a2s4")
+color_ramp = SubResource("GradientTexture1D_ltu1k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yr1kq"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 0.403922, 0.282353, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ot8id"]
+material = SubResource("StandardMaterial3D_yr1kq")
+
+[sub_resource type="Gradient" id="Gradient_cal0e"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ogbc8"]
+gradient = SubResource("Gradient_cal0e")
+
+[sub_resource type="Curve" id="Curve_usvr5"]
+max_value = 1.5
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.180464, 1.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ipo4w"]
+curve = SubResource("Curve_usvr5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ki4rl"]
+direction = Vector3(0, 1, 0)
+spread = 35.0
+initial_velocity_min = 3.0
+initial_velocity_max = 5.0
+gravity = Vector3(0, 1, 0)
+scale_curve = SubResource("CurveTexture_ipo4w")
+color_ramp = SubResource("GradientTexture1D_ogbc8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vts0n"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.92549, 0.27451, 0.321569, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_d2u0p"]
+material = SubResource("StandardMaterial3D_vts0n")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4w3d7"]
+radius = 7.0
+
+[node name="Explosion" type="Node3D"]
+script = ExtResource("1_mc416")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource("ParticleProcessMaterial_lgjsd")
+draw_pass_1 = SubResource("SphereMesh_ot8id")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.7
+process_material = SubResource("ParticleProcessMaterial_ki4rl")
+draw_pass_1 = SubResource("SphereMesh_d2u0p")
+
+[node name="ShakerEmitter3D" type="Node3D" parent="."]
+script = ExtResource("2_smp1q")
+max_distance = 7.0
+distance_attenuation = 0.707107
+duration = 1.0
+fade_in = 0.0426888
+shakerPreset = ExtResource("3_3vhcu")
+
+[node name="Area3D" type="Area3D" parent="ShakerEmitter3D"]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ShakerEmitter3D/Area3D"]
+shape = SubResource("SphereShape3D_4w3d7")
+
+[connection signal="finished" from="GPUParticles3D" to="." method="_on_gpu_particles_3d_finished"]
