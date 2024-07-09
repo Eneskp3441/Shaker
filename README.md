@@ -14,9 +14,12 @@ In general, it can be used for multiple purposes and you can edit the shaking ef
 
 <p align="center">
   <a href="https://youtu.be/SUgHkyyns1k">
-    <img src="https://i9.ytimg.com/vi_webp/SUgHkyyns1k/mqdefault.webp?v=668c98a5&sqp=CKCzsrQG&rs=AOn4CLB8IcvFmECjEvrc3SGQLwDkKoLcbA" alt="Shaker">
+    <img src="https://github.com/Eneskp3441/Shaker/assets/100702845/fc955670-44a7-41f3-8ec7-4564f4b9615f" alt="Shaker">
   </a>
 </p>
 <p align="center">
   <a href="https://youtu.be/SUgHkyyns1k">Watch The Video</a>
 </p>
+
+# Documentation (WIP)
+Check [the documentation](../../wiki)
