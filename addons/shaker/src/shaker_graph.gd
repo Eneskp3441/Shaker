@@ -132,7 +132,7 @@ func _draw() -> void:
 # Draws the zero line
 func _draw_zero_line() -> void:
 	var font_size: int = 8
-	draw_line(Vector2(0, size.y * 0.5), Vector2(size.x, size.y * 0.5), Color.DIM_GRAY, 0.5, false)
+	draw_line(Vector2(0, size.y * 0.5), Vector2(size.x, size.y * 0.5), Color.DIM_GRAY, 1, false)
 	draw_string(ThemeDB.fallback_font, Vector2(5.0, size.y * 0.5 + font_size * 0.5), "0", HORIZONTAL_ALIGNMENT_LEFT, -1, font_size, Color.DIM_GRAY, TextServer.JUSTIFICATION_NONE, TextServer.DIRECTION_AUTO, TextServer.ORIENTATION_HORIZONTAL)
 
 # Draws the min/max values

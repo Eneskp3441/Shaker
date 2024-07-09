@@ -57,7 +57,7 @@ func _reset() -> void:
 	_external_shakes.clear()
 	_initalize_prev_positions()
 	is_playing = false
-	_timer_offset = 0.0
+	_initialize_timer_offset()
 	_fading_out = false
 	_initalize_target()
 
@@ -95,7 +95,7 @@ func _progress_shake() -> void:
 	_ease_in = ease((timer)/_final_duration, fade_in)
 	_ease_out = ease(1.0-(max((timer)-_timer_offset, 0.0))/_final_duration, fade_out)
 	
-	if !(duration > 0) || _fading_out:
+	if (!(duration > 0) || _fading_out) && is_playing:
 		if _ease_out <= get_process_delta_time():
 			force_stop_shake()
 	
@@ -181,8 +181,7 @@ func play_shake() -> void:
 		if randomize: _seed = randf_range(10000, 99999)
 		is_playing = !is_playing if Engine.is_editor_hint() else true
 		_fading_out = false
-		if !(duration > 0): _timer_offset = 0x80000
-		else: _timer_offset = 0.0
+		_initialize_timer_offset()
 		shake_started.emit()
 
 func _initalize_target() -> void:
@@ -262,3 +261,7 @@ class ExternalShake:
 	var fade_in:float = 0.25
 	var fade_out:float = 0.25
 	var mode:ShakeAddMode=ShakeAddMode.add
+
+func _initialize_timer_offset() -> void:
+	if !(duration > 0): _timer_offset = 0x80000
+	else: _timer_offset = 0.0

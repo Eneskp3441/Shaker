@@ -101,8 +101,12 @@ func play_shake() -> void:
 	if shakerPreset != null:
 		emitting = true
 		_fading_out = false
-		_timer_offset = 0x80000 if not (duration > 0) else 0.0
+		_initialize_timer_offset()
 		shake_started.emit()
+
+func _initialize_timer_offset() -> void:
+	if !(duration > 0): _timer_offset = 0x80000
+	else: _timer_offset = 0.0
 
 # Updates the gizmo
 func update_gizmo() -> void:

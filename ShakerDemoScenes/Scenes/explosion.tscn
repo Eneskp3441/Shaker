@@ -67,7 +67,7 @@ albedo_color = Color(0.92549, 0.27451, 0.321569, 1)
 material = SubResource("StandardMaterial3D_vts0n")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4w3d7"]
-radius = 7.0
+radius = 7.04668
 
 [node name="Explosion" type="Node3D"]
 script = ExtResource("1_mc416")

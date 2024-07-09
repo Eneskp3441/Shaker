@@ -315,7 +315,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09691, 0)
 shape = SubResource("CapsuleShape3D_smf7l")
 
 [node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
-transform = Transform3D(0.999997, -0.00263805, 0, 0.00263803, 0.999987, 0.00428613, -1.13071e-05, -0.00428612, 0.999991, -0.0147733, 1.81315, -0.179468)
+transform = Transform3D(0.999997, -0.00255048, 0, 0.00255041, 0.999968, -0.00761558, 1.94234e-05, 0.00761555, 0.999971, 0.00795542, 1.80669, -0.179468)
 fov = 60.0
 
 [node name="ShakerComponent3D" type="Node3D" parent="CharacterBody3D" node_paths=PackedStringArray("Targets")]
@@ -389,6 +389,60 @@ mesh = SubResource("CylinderMesh_n27iv")
 
 [node name="StarScene" parent="Demo1" instance=ExtResource("11_um8yn")]
 transform = Transform3D(-5.59506e-08, 0, 1.28, 0, 1.28, 0, -1.28, 0, -5.59506e-08, 0.0578995, 1.52019, 1.41742)
+
+[node name="star" parent="Demo1/StarScene" index="0"]
+transform = Transform3D(4.28949, -6.73628, 0.471944, 0.0478954, 0.589444, 7.97811, -6.75262, -4.27493, 0.356382, -0.1812, 0.406345, 0.320609)
+
+[node name="star8" parent="Demo1/StarScene" index="1"]
+transform = Transform3D(7.00983, 3.85433, -0.0802009, 0.704674, -1.1174, 7.89017, 3.79022, -6.92066, -1.31861, 1.12154, 0.778684, -0.536468)
+
+[node name="star2" parent="Demo1/StarScene" index="2"]
+transform = Transform3D(5.61051, 5.69806, -0.233044, 0.0243467, 0.302981, 7.99422, 5.70277, -5.60717, 0.195144, 2.5649, 0.415213, 0.186281)
+
+[node name="star3" parent="Demo1/StarScene" index="3"]
+transform = Transform3D(5.54842, 5.75725, -0.262935, 2.44027, -2.01621, 7.34711, 5.22113, -5.17581, -3.1545, 2.32084, 0.914858, -0.104826)
+
+[node name="star4" parent="Demo1/StarScene" index="4"]
+transform = Transform3D(6.08218, -4.26309, -2.97207, 2.32796, -1.85548, 7.42548, -4.64627, -6.51024, -0.170131, -0.427687, -0.146887, -0.109304)
+
+[node name="star5" parent="Demo1/StarScene" index="5"]
+transform = Transform3D(4.77972, -5.28803, -3.63194, 0.769343, -4.02401, 6.87135, -6.36886, -4.45467, -1.89567, 0.00150853, 0.980533, -0.119724)
+
+[node name="star6" parent="Demo1/StarScene" index="6"]
+transform = Transform3D(7.95141, 0.646021, -0.598136, 0.836987, -3.86112, 6.95638, 0.273061, -6.97671, -3.90525, 1.97258, -0.0284218, 0.272263)
+
+[node name="star7" parent="Demo1/StarScene" index="7"]
+transform = Transform3D(7.68207, 2.23142, 0.0811974, 1.60773, -5.72946, 5.34682, 1.54953, -5.11801, -5.9502, 1.27461, -0.217158, 0.265786)
+
+[node name="shaker_text_svg_5mm" parent="Demo1/StarScene/Shaker" index="0"]
+transform = Transform3D(1, 0, 0, 0, 7.90754e-07, -1, 0, 1, 7.90754e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_001" parent="Demo1/StarScene/Shaker" index="1"]
+transform = Transform3D(1, 0, 0, 0, -8.78176e-07, -1, 0, 1, -8.78176e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_002" parent="Demo1/StarScene/Shaker" index="2"]
+transform = Transform3D(1, 0, 0, 0, 7.90754e-07, -1, 0, 1, 7.90754e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_003" parent="Demo1/StarScene/Shaker" index="3"]
+transform = Transform3D(1, 0, 0, 0, -8.78176e-07, -1, 0, 1, -8.78176e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_004" parent="Demo1/StarScene/Shaker" index="4"]
+transform = Transform3D(1, 0, 0, 0, 7.90754e-07, -1, 0, 1, 7.90754e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_005" parent="Demo1/StarScene/Shaker" index="5"]
+transform = Transform3D(1, 0, 0, 0, 7.90754e-07, -1, 0, 1, 7.90754e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_006" parent="Demo1/StarScene/Shaker" index="6"]
+transform = Transform3D(1, 0, 0, 0, -8.78176e-07, -1, 0, 1, -8.78176e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_007" parent="Demo1/StarScene/Shaker" index="7"]
+transform = Transform3D(1, 0, 0, 0, -8.78176e-07, -1, 0, 1, -8.78176e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_008" parent="Demo1/StarScene/Shaker" index="8"]
+transform = Transform3D(1, 0, 0, 0, 7.90754e-07, -1, 0, 1, 7.90754e-07, 0, 0, 0)
+
+[node name="shaker_text_svg_5mm_009" parent="Demo1/StarScene/Shaker" index="9"]
+transform = Transform3D(1, 0, 0, 0, -8.78176e-07, -1, 0, 1, -8.78176e-07, 0, 0, 0)
 
 [node name="Demo2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 12)
@@ -608,3 +662,5 @@ shape = SubResource("BoxShape3D_bj4y8")
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -23.9271, 2.7818, -0.323624)
 shape = SubResource("BoxShape3D_bj4y8")
+
+[editable path="Demo1/StarScene"]

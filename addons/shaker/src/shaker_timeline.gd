@@ -38,4 +38,4 @@ func _draw() -> void:
 	# Playing Timeline 
 	var _final_size:Vector2 = size - GRAPH.graph_offset;
 	var _timeline_offset:Vector2 = Vector2(-GRAPH.graph_time_offset * _final_size.x, 0.0)
-	draw_line(GRAPH.graph_offset+_timeline_offset+Vector2(timer*_final_size.x, 0.0), GRAPH.graph_offset+_timeline_offset+Vector2(timer*_final_size.x, _final_size.y), Color.ORANGE, .5, false)
+	draw_line(GRAPH.graph_offset+_timeline_offset+Vector2(timer*_final_size.x, 0.0), GRAPH.graph_offset+_timeline_offset+Vector2(timer*_final_size.x, _final_size.y), Color.ORANGE, 1, false)

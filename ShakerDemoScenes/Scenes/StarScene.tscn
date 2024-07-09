@@ -483,7 +483,7 @@ bake_internal = 64
 script = ExtResource("3_yyawl")
 frequency = Vector3(1, 1, 1)
 phase = Vector3(1, 1, 1)
-amplitude = Vector3(0.25, 0.25, 0.25)
+amplitude = Vector3(1, 0.25, 0.25)
 offset = Vector3(0, 0, 0)
 BlendingMode = 0
 fade_in = 0.0
@@ -499,7 +499,7 @@ PositionShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3
 RotationShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([SubResource("Resource_augb4")])
 ScaleShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([])
 bake_internal = 64
-__follow_timeline = false
+__follow_timeline = true
 
 [sub_resource type="Resource" id="Resource_q7svw"]
 script = ExtResource("3_yyawl")
@@ -526,7 +526,7 @@ __follow_timeline = false
 [node name="StarScene" type="Node3D"]
 
 [node name="star" type="Node3D" parent="."]
-transform = Transform3D(5.07656, -6.18292, -0.00100869, 1.93249e-07, -0.00130498, 8, -6.18292, -5.07656, -0.000827949, -0.200041, 0.395989, 0.299962)
+transform = Transform3D(4.50051, -6.51024, -1.16711, -0.0268521, -1.42965, 7.87117, -6.61398, -4.42412, -0.826121, -0.211481, 0.414193, 0.304745)
 
 [node name="star_0" type="MeshInstance3D" parent="star"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -541,7 +541,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star8" type="Node3D" parent="."]
-transform = Transform3D(6.38287, 4.82276, 5.03002e-06, 0.516308, -0.683336, 7.95402, 4.79505, -6.34618, -0.856459, 1.10661, 0.763213, -0.557965)
+transform = Transform3D(6.25072, 4.99084, 0.141735, 1.78583, -2.44691, 7.40428, 4.66256, -5.75362, -3.02596, 1.1245, 0.751296, -0.553738)
 
 [node name="star_0" type="MeshInstance3D" parent="star8"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -556,7 +556,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star2" type="Node3D" parent="."]
-transform = Transform3D(4.65948, 6.50302, 0.00107313, 9.48977e-08, -0.00132023, 8, 6.50302, -4.65948, -0.000769028, 2.55522, 0.396014, 0.165862)
+transform = Transform3D(4.44539, 6.30932, 2.10499, 0.128275, -2.61272, 7.56024, 6.64996, -4.16728, -1.55299, 2.53401, 0.399554, 0.153369)
 
 [node name="star_0" type="MeshInstance3D" parent="star2"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -571,7 +571,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star3" type="Node3D" parent="."]
-transform = Transform3D(4.65916, 6.50325, 0.000312964, 2.48931, -1.78379, 7.39063, 6.00796, -4.30417, -3.06245, 2.31728, 0.893655, -0.122336)
+transform = Transform3D(5.21858, 6.06249, -0.112503, 4.05026, -3.3748, 6.01715, 4.5124, -3.98209, -5.27079, 2.33808, 0.899114, -0.103771)
 
 [node name="star_0" type="MeshInstance3D" parent="star3"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -586,7 +586,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star4" type="Node3D" parent="."]
-transform = Transform3D(6.60273, -3.34971, -3.03042, 2.48792, -1.78278, 7.39134, -3.77018, -7.04281, -0.429676, -0.424808, -0.168193, -0.122334)
+transform = Transform3D(7.47476, -2.66385, -1.0158, 0.889056, -0.530289, 7.93274, -2.70879, -7.52481, -0.199434, -0.441539, -0.181694, -0.143712)
 
 [node name="star_0" type="MeshInstance3D" parent="star4"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -601,7 +601,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star5" type="Node3D" parent="."]
-transform = Transform3D(5.36613, -4.65312, -3.68146, 0.937924, -4.23611, 6.72128, -5.85875, -4.94002, -2.2959, 0.0105675, 0.961034, -0.127106)
+transform = Transform3D(4.40286, -4.74048, -4.70559, 0.72878, -5.26133, 5.98224, -6.63955, -3.72104, -2.46377, 0.0202994, 0.980204, -0.106668)
 
 [node name="star_0" type="MeshInstance3D" parent="star5"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -616,7 +616,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star6" type="Node3D" parent="."]
-transform = Transform3D(7.9096, 1.13501, -0.387232, 0.936919, -4.23596, 6.72152, 0.748588, -6.69092, -4.32102, 1.98701, -0.0443631, 0.271192)
+transform = Transform3D(7.69749, 2.17902, -0.0213477, 1.16953, -4.06491, 6.79034, 1.83869, -6.5367, -4.22975, 1.98598, -0.0658389, 0.255283)
 
 [node name="star_0" type="MeshInstance3D" parent="star6"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -631,7 +631,7 @@ mesh = SubResource("ArrayMesh_o1678")
 skeleton = NodePath("")
 
 [node name="star7" type="Node3D" parent="."]
-transform = Transform3D(7.66428, 2.26507, 0.358149, 1.5804, -6.12248, 4.90077, 1.66167, -4.62436, -6.31301, 1.29311, -0.228112, 0.271123)
+transform = Transform3D(7.83406, 1.61619, -0.12417, 1.23145, -5.5356, 5.64275, 1.05405, -5.54482, -5.66956, 1.28524, -0.208103, 0.279709)
 
 [node name="star_0" type="MeshInstance3D" parent="star7"]
 mesh = SubResource("ArrayMesh_t4x24")
@@ -703,6 +703,7 @@ script = ExtResource("2_gelg7")
 custom_target = true
 Targets = [NodePath("../star"), NodePath("../star8"), NodePath("../star2"), NodePath("../star3"), NodePath("../star4"), NodePath("../star5"), NodePath("../star6"), NodePath("../star7")]
 randomize = true
+is_playing = true
 AutoPlay = true
 intensity = 0.215
 shakerPreset = SubResource("Resource_d3g58")

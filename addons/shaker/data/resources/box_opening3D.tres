@@ -87,4 +87,4 @@ PositionShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3
 RotationShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([SubResource("Resource_c2tfw"), SubResource("Resource_1e44d")])
 ScaleShake = Array[Resource("res://addons/shaker/data/Vector3/BaseShakerType3D.gd")]([SubResource("Resource_011mv")])
 bake_internal = 64
-__follow_timeline = false
+__follow_timeline = true

@@ -150,3 +150,4 @@ class EmitterData:
 	
 	func _init(_emitter: ShakerEmitter3D) -> void:
 		self.emitter = _emitter
+
