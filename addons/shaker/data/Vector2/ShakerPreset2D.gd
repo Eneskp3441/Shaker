@@ -19,7 +19,7 @@ extends ShakerPresetBase
 
 # Custom setter and getter functions
 func set_position_shake(value: Array[ShakerTypeBase2D]) -> void:
-	for _shake_type in array_difference(PositionShake, value):
+	for _shake_type in _array_difference(PositionShake, value):
 		if _shake_type != null:
 			_shake_type.property_changed.connect(_on_property_changed)
 	PositionShake = value
@@ -31,7 +31,7 @@ func get_position_shake() -> Array[ShakerTypeBase2D]:
 	return PositionShake
 
 func set_rotation_shake(value: Array[ShakerTypeBase1D]) -> void:
-	for _shake_type in array_difference(RotationShake, value):
+	for _shake_type in _array_difference(RotationShake, value):
 		if _shake_type != null:
 			_shake_type.property_changed.connect(_on_property_changed)
 	RotationShake = value
@@ -52,7 +52,7 @@ func get_shakes_by_category(category:Categories) -> Array:
 	return [null]
 
 func set_scale_shake(value: Array[ShakerTypeBase2D]) -> void:
-	for _shake_type in array_difference(ScaleShake, value):
+	for _shake_type in _array_difference(ScaleShake, value):
 		if _shake_type != null:
 			_shake_type.property_changed.connect(_on_property_changed)
 	ScaleShake = value

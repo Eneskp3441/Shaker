@@ -49,5 +49,5 @@ func _on_property_changed(property_name: StringName) -> void:
 	property_changed.emit(property_name)
 
 # Calculate the difference between two arrays
-func array_difference(a: Array, b: Array) -> Array:
+func _array_difference(a: Array, b: Array) -> Array:
 	return b.filter(func(item): return not a.has(item))
