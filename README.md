@@ -20,3 +20,6 @@ In general, it can be used for multiple purposes and you can edit the shaking ef
 <p align="center">
   <a href="https://youtu.be/SUgHkyyns1k">Watch The Video</a>
 </p>
+
+# Documentation (WIP)
+Check [the documentation](../../wiki)
