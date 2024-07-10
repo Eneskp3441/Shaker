@@ -32,15 +32,22 @@ In general, it can be used for multiple purposes and you can edit the shaking ef
 5. Once the installation is complete, go to "Project" -> "Project Settings" -> "Plugins".
 6. Find the Shaker plugin in the list and enable it by checking the box next to it.
 
-## GitHub Installation
+## Installation from GitHub
 
-1. Go to the GitHub repository of the Shaker plugin.
-2. Download the repository as a ZIP file.
-3. Extract the contents of the ZIP file.
-4. Copy the extracted files into your Godot project's directory.
-5. Open your project in the Godot Editor.
-6. Go to "Project" -> "Project Settings" -> "Plugins".
-7. Find the Shaker plugin in the list and enable it by checking the box next to it.
+### Option 1: Stable Release (Recommended)
+1. Visit the [Shaker plugin GitHub repository](https://github.com/Eneskp3441/Shaker).
+2. Navigate to the [Releases](https://github.com/Eneskp3441/Shaker/releases) page.
+3. Download the latest stable release version.
+4. Extract the downloaded files into your Godot project's `addons` folder.
+
+### Option 2: Latest Development Version
+1. Go to the [Shaker plugin GitHub repository](https://github.com/Eneskp3441/Shaker).
+2. Click on the green "Code" button and select "Download ZIP".
+3. Extract the contents of the ZIP file into your Godot project's `addons` folder.
+
+Note: The development version may contain new features but might also include unstable code. Use it at your own risk.
+
+After installation, remember to enable the plugin in your Godot project settings.
 
 ## Usage
 
