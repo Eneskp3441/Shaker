@@ -3,6 +3,8 @@
 class_name ShakerEmitter3D
 extends "res://addons/shaker/src/Vector3/ShakerBase3D.gd"
 
+## It emits shake values and is received by ShakeEmitter3D.
+
 # Exported variables
 @export var emit: bool:
 	set = set_emit,
@@ -126,11 +128,12 @@ func stop_shake() -> void:
 
 # Immediately stops the shake effect
 func force_stop_shake() -> void:
-	set_progress(0.0)
-	emit = false
-	_fading_out = false
-	emitting = false
-	shake_finished.emit()
+	if emitting:
+		if emit: emit = false
+		_fading_out = false
+		emitting = false
+		set_progress(0.0)
+		shake_finished.emit()
 
 # Returns configuration warnings
 func _get_configuration_warnings() -> PackedStringArray:

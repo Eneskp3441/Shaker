@@ -6,6 +6,7 @@ extends Resource
 # Enumerations for blending modes and graph axes
 enum BlendingModes {
 	Add,
+	Override,
 	Multiply,
 	Subtract,
 	Average,

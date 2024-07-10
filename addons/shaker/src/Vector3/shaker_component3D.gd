@@ -3,6 +3,8 @@
 class_name ShakerComponent3D
 extends "res://addons/shaker/src/Vector3/ShakerBase3D.gd"
 
+## Allows you to apply shake effect to any 3D node according to position, rotation, scale
+
 enum ShakeAddMode {
 	add,
 	override
@@ -96,7 +98,7 @@ func _progress_shake() -> void:
 	if (!(duration > 0) || _fading_out) && is_playing:
 		if _ease_out <= get_process_delta_time():
 			force_stop_shake()
-	
+
 	var _shake_position: Array[Vector3] = []
 	var _shake_rotation: Array[Vector3] = []
 	var _shake_scale: Array[Vector3] = []
@@ -118,7 +120,6 @@ func _progress_shake() -> void:
 		if shakerPreset != null:
 			var _value:float = timer + _randomized
 			var _strength:float = intensity * _ease_in * _ease_out
-			
 			_shake_position[_index] += (shakerPreset.get_value(_value, ShakerPreset3D.Categories.POSITION) * _strength)
 			_shake_rotation[_index] += (shakerPreset.get_value(_value, ShakerPreset3D.Categories.ROTATION) * _strength * (PI/2.0))
 			_shake_scale[_index] += (shakerPreset.get_value(_value, ShakerPreset3D.Categories.SCALE) * _strength)
@@ -168,19 +169,23 @@ func stop_shake() -> void:
 
 # Immediately stops the shake effect
 func force_stop_shake() -> void:
-	set_progress(0.0)
-	_reset()
-	shake_finished.emit()
+	if is_playing || _fading_out:
+		set_progress(0.0)
+		_reset()
+		shake_finished.emit()
 
 # Starts the shake effect
 func play_shake() -> void:
 	if shakerPreset != null:
 		_initalize_target()
-		if randomize: _seed = randf_range(10000, 99999)
+		randomize_shake()
 		is_playing = !is_playing if Engine.is_editor_hint() else true
 		_fading_out = false
 		_initialize_timer_offset()
 		shake_started.emit()
+
+func randomize_shake() -> void:
+	_seed = randf_range(10000, 99999)
 
 func _initialize_timer_offset() -> void:
 	if !(duration > 0): _timer_offset = 0x80000
@@ -237,7 +242,7 @@ func get_custom_target() -> bool:
 	return custom_target
 
 func set_randomize(value: bool) -> void:
-	if custom_target:
+	if custom_target && Targets.size() > 1:
 		for index: int in Targets.size():
 			var target: Node3D = Targets[index]
 			var i = fmod(index, _last_position_shake.size())
@@ -248,6 +253,7 @@ func set_randomize(value: bool) -> void:
 		_last_rotation_shake.fill(_last_rotation_shake[0])
 		_last_scale_shake.fill(_last_scale_shake[0])
 	randomize = value
+	randomize_shake()
 
 func get_randomize() -> bool:
 	return randomize

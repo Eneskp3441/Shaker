@@ -34,7 +34,7 @@ func get_offset() -> Vector3:
 # Get the shake value at a given time
 func get_value(t: float) -> Vector3:
 	var result: Vector3 = Vector3.ZERO
-	return result
+	return _calc_value(fmod(t, 1.0), result)
 
 # Calculate the shake value
 func _calc_value(t: float, result: Vector3) -> Vector3:

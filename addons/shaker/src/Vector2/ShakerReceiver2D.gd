@@ -3,6 +3,8 @@
 class_name ShakerReceiver2D
 extends Node2D
 
+## Transmits values from ShakerEmitter2D to ShakerComponent2D
+
 # Fade-in easing
 @export_exp_easing var enter_fade_in: float = 0.1:
 	set = set_fade_in,

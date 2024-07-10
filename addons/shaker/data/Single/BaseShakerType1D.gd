@@ -32,7 +32,7 @@ func get_offset() -> float:
 # Get the shake value at a given time
 func get_value(t: float) -> float:
 	var result:float = 0.0;
-	return result
+	return _calc_value(fmod(t, 1.0), result)
 
 # Calculate the shake value
 func _calc_value(t: float, result: float) -> float:

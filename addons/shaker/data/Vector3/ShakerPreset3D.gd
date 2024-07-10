@@ -75,11 +75,17 @@ func get_value(t: float, _category: Categories = Categories.POSITION) -> Vector3
 				shake_type.BlendingModes.Subtract:
 					result -= _shake_result
 				shake_type.BlendingModes.Max:
-					result = max(result, _shake_result)
+					result.x = max(result.x, _shake_result.x)
+					result.y = max(result.y, _shake_result.y)
+					result.z = max(result.z, _shake_result.z)
 				shake_type.BlendingModes.Min:
-					result = min(result, _shake_result)
+					result.x = min(result.x, _shake_result.x)
+					result.y = min(result.y, _shake_result.y)
+					result.z = min(result.z, _shake_result.z)
 				shake_type.BlendingModes.Average:
 					result = (result + _shake_result) * 0.5
+				shake_type.BlendingModes.Override:
+					result = _shake_result
 	return result
 
 func _change_graph_category(_name:String, _category_index:int) -> void:

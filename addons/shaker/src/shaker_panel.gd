@@ -37,9 +37,9 @@ func _ready() -> void:
 			_update_buttons()
 		)
 		
-		#Target.shake_fading_out.connect(func():
-			#_update_buttons()
-		#)
+		Target.shake_finished.connect(func():
+			_update_buttons()
+		)
 	
 func _on_play_pressed() -> void:
 	Target.play_shake()

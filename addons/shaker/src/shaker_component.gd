@@ -3,12 +3,14 @@
 class_name ShakerComponent
 extends Node
 
+# Allows you to apply a shake effect to any variable of a node of any type
+
 # Custom target flag
 @export var custom_target: bool = false:
 	set = set_custom_target,
 	get = get_custom_target
 
-# Array of target Node2D objects
+# Array of target Node objects
 @export var Targets: Array[Node]
 
 # Randomization flag
@@ -160,11 +162,10 @@ func _progress_shake() -> void:
 	if (!(duration > 0) || _fading_out) && is_playing:
 		if _ease_out <= get_process_delta_time():
 			force_stop_shake()
-	var _count:int =(Targets.size() if randomize else 1)
+	var _count:int = Targets.size() # if randomize else 1)
 	var _value_temp:Array[Dictionary] = []
 	for i in _count:
 		_value_temp.append({})
-	
 	for _index:int in _count:
 		var _randomized:float = (_seed * (float(_index+1) / Targets.size())) if randomize else 0.0
 		var target:Node = Targets[_index]
@@ -176,8 +177,8 @@ func _progress_shake() -> void:
 			if shake:
 				if !shake.property_name.is_empty() && shake.shake_type:
 					var _value:float = timer + _randomized
-					var _strength:float = intensity * _ease_in * _ease_out
-					var _add_value = (shake.get_value(_value) * _strength)
+					
+					var _add_value = (shake.get_value(_value))
 					var current_value = target.get(shake.property_name)
 					if typeof(current_value) == typeof(current_value):
 						if !(_last_values[_index].has(shake.property_name)):
@@ -187,9 +188,10 @@ func _progress_shake() -> void:
 						var _prev_temp = (_add_value * 0.0) if !(_value_temp[_index].has(shake.property_name)) else _value_temp[_index][shake.property_name]["value"]
 						_value_temp[_index][shake.property_name] = {}
 						_value_temp[_index][shake.property_name]["value"] = _prev_temp + _add_value
-						_value_temp[_index][shake.property_name]["blend_mode"] = shake.blend_mode
+						_value_temp[_index][shake.property_name]["blend_mode"] = shake.shake_type.BlendingMode
 					else:
 						push_error("Variable value type is %s but Shake type is %s" % [type_string(current_value), type_string(_add_value)])
+	var _strength:float = intensity * _ease_in * _ease_out
 	for index:int in Targets.size():
 		var target:Node = Targets[index]
 		var i:int = fmod(index, _value_temp.size())
@@ -199,12 +201,44 @@ func _progress_shake() -> void:
 			if !property_name.is_empty():
 				var value = property[property_name]["value"]
 				var blend_mode = property[property_name]["blend_mode"]
-				var current_value = 0.0
+				var current_value = target.get(property_name)-_last_values[i][property_name]["value"]
+				var default_value = current_value
 				match blend_mode:
-					ShakerProperty.BlendingModes.Add:
-						current_value = target.get(property_name)
+					ShakerTypeBase.BlendingModes.Add:
+						current_value += value
+					ShakerTypeBase.BlendingModes.Multiply:
+						current_value *= value
+					ShakerTypeBase.BlendingModes.Subtract:
+						current_value -= value
+					ShakerTypeBase.BlendingModes.Max:
+						if typeof(current_value) == TYPE_VECTOR2 || typeof(current_value) == TYPE_VECTOR2I:
+							current_value.x = max(current_value.x, value.x)
+							current_value.y = max(current_value.y, value.y)
+						elif typeof(current_value) == TYPE_VECTOR3 || typeof(current_value) == TYPE_VECTOR3I:
+							current_value.x = max(current_value.x, value.x)
+							current_value.y = max(current_value.y, value.y)
+							current_value.z = max(current_value.z, value.z)
+						else:
+							current_value = max(current_value, value)
+					ShakerTypeBase.BlendingModes.Min:
+						if typeof(current_value) == TYPE_VECTOR2 || typeof(current_value) == TYPE_VECTOR2I:
+							current_value.x = min(current_value.x, value.x)
+							current_value.y = min(current_value.y, value.y)
+						elif typeof(current_value) == TYPE_VECTOR3 || typeof(current_value) == TYPE_VECTOR3I:
+							current_value.x = min(current_value.x, value.x)
+							current_value.y = min(current_value.y, value.y)
+							current_value.z = min(current_value.z, value.z)
+						else:
+							current_value = min(current_value, value)
+					ShakerTypeBase.BlendingModes.Average:
+						current_value = (current_value + value) * 0.5
+					ShakerTypeBase.BlendingModes.Override:
+						current_value = value
+						
 				if current_value != null:
-					target.set(property_name,  current_value+(value-_last_values[i][property_name]["value"]))
+					var _added_value = (current_value - default_value) * _strength
+					target.set(property_name,  default_value + _added_value )
+					_value_temp[i][property_name]["value"] = _added_value
 				else:
 					push_error(name," Variable Error: ",target," has no variable named \"",property_name,"\"")
 	_last_values = _value_temp
@@ -218,11 +252,12 @@ func stop_shake() -> void:
 
 # Immediately stops the shake effect
 func force_stop_shake() -> void:
-	is_playing = false
-	_fading_out = false
-	set_progress(0.0)
-	_last_values.clear()
-	shake_finished.emit()
+	if is_playing || _fading_out:
+		set_progress(0.0)
+		is_playing = false
+		_fading_out = false
+		_last_values.clear()
+		shake_finished.emit()
 
 func set_shaker_property(value:Array[ShakerProperty]) -> void:
 	shakerProperty = value
@@ -234,16 +269,19 @@ func get_shaker_property() -> Array[ShakerProperty]:
 func play_shake() -> void:
 	if shakerProperty != null:
 		_initalize_target()
-		if randomize: _seed = randf_range(10000, 99999)
+		randomize_shake()
 		is_playing = !is_playing if Engine.is_editor_hint() else true
 		_fading_out = false
 		_initialize_timer_offset()
 		shake_started.emit()
 
+func randomize_shake() -> void:
+	_seed = randf_range(10000, 99999)
+
 func _initalize_target() -> void:
 	if !custom_target:
 		Targets.clear()
-		if get_parent() is Node2D:
+		if get_parent() is Node:
 			Targets.append(get_parent())
 
 
@@ -278,7 +316,7 @@ func get_custom_target() -> bool:
 	return custom_target
 
 func set_randomize(value: bool) -> void:
-	if custom_target:
+	if custom_target && Targets.size() > 1:
 		if _last_values.size() > 0:
 			for index: int in Targets.size():
 				var target:Node = Targets[index]
@@ -288,6 +326,7 @@ func set_randomize(value: bool) -> void:
 					target.set(shake.property_name, current_value - _last_values[i][shake.property_name]["value"])
 		_last_values.clear()
 	randomize = value
+	randomize_shake()
 
 func _initialize_timer_offset() -> void:
 	if !(duration > 0): _timer_offset = 0x80000

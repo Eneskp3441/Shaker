@@ -82,9 +82,13 @@ func get_value(t: float, _category: Categories = Categories.POSITION):
 				shake_type.BlendingModes.Subtract:
 					result -= _shake_result
 				shake_type.BlendingModes.Max:
-					result = result.max(_shake_result)
+					result.x = max(result.x, _shake_result.x)
+					result.y = max(result.y, _shake_result.y)
 				shake_type.BlendingModes.Min:
-					result = result.min(_shake_result)
+					result.x = min(result.x, _shake_result.x)
+					result.y = min(result.y, _shake_result.y)
 				shake_type.BlendingModes.Average:
 					result = (result + _shake_result) * 0.5
+				shake_type.BlendingModes.Override:
+					result = _shake_result
 	return result

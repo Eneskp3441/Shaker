@@ -7,6 +7,6 @@ const EXPLOSION = preload("res://ShakerDemoScenes/Scenes/explosion.tscn")
 func _process(delta: float) -> void:
 	timer += delta
 	if timer > 1.0:
-		var exp = EXPLOSION.instantiate()
-		explosion.add_child(exp)
+		var _exp = EXPLOSION.instantiate()
+		explosion.add_child(_exp)
 		timer = 0.0

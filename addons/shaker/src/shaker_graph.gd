@@ -6,7 +6,7 @@ const ShakerBase3d = preload("res://addons/shaker/src/Vector3/ShakerBase3D.gd")
 const ShakerBase2d = preload("res://addons/shaker/src/Vector2/ShakerBase2D.gd")
 
 # Graph properties
-var graph_points: PackedVector2Array = PackedVector2Array()
+var graph_points:Array[PackedFloat32Array]
 var y_scale: float = 32.0
 var width: float = 2.0
 var shake: Resource
@@ -25,13 +25,15 @@ var flip_y: bool = true
 var selected_category: int = 0
 var graph_pressing: bool = false
 var graph_middle_pressing: bool = false
+var point_color_by_axis:Array[Color] = [Color.RED, Color.GREEN, Color.DEEP_SKY_BLUE]
+var _unselected_opacity:float = .10
 
 # Graph time offset property
 var graph_time_offset: float = 0.0:
 	set = set_graph_time_offset,
 	get = get_graph_time_offset
 
-# Called when the node enters the scene tree for the first time
+# Called when the node enters the scene tree for the first timeX
 func _ready() -> void:
 	shake.property_changed.connect(on_property_changed)
 	
@@ -110,16 +112,18 @@ func _update_graph() -> void:
 		var _baked: float = round(shake.bake_internal)
 		_graph_min = 0.0
 		_graph_max = 0.0
-		for i in _baked + 1:
-			var _args: Array = [graph_time_offset + (i / _baked)]
-			if shake is ShakerPresetBase:
-				_args.append(selected_category)
-			var _val = shake.callv("get_value", _args)
-			if typeof(_val) != TYPE_FLOAT: _val = _val[axis_button.get_selected_id()]
-			var _result: float = _val * (-1 if flip_y else 1)
-			graph_points.append(Vector2(0.0, _result))
-			_graph_min = min(_graph_min, _result)
-			_graph_max = max(_graph_max, _result)
+		graph_points.resize(axis_button.item_count)
+		for axis_index in axis_button.item_count:
+			for i in _baked + 1:
+				var _args: Array = [graph_time_offset + (i / _baked)]
+				if shake is ShakerPresetBase:
+					_args.append(selected_category)
+				var _val = shake.callv("get_value", _args)
+				if typeof(_val) != TYPE_FLOAT: _val = _val[axis_index]
+				var _result: float = _val * (-1 if flip_y else 1)
+				graph_points[axis_index].append(_result)
+				_graph_min = min(_graph_min, _result)
+				_graph_max = max(_graph_max, _result)
 		_graph_max_total = max(abs(_graph_max), abs(_graph_min))
 
 # Draws the graph
@@ -149,17 +153,21 @@ func _draw_min_max() -> void:
 
 # Draws the graph points
 func _draw_graph_points() -> void:
-	for point_index in graph_points.size():
+	for axis_index in graph_points.size():
+		var _point_length:int = graph_points[axis_index].size()
+		var _point_color:Color = point_color_by_axis[fmod(axis_index, point_color_by_axis.size())]
+		var alpha:float = _unselected_opacity if axis_index != axis_button.get_selected_id() else 1.0
 		var _final_size: Vector2 = size - graph_offset
-		var _size_offset = Vector2((_final_size.x / (graph_points.size())) * point_index, _final_size.y * 0.5)
-		var point: Vector2 = graph_points[point_index]
-		if point_index < graph_points.size() - 1:
-			var _size_offset_next = Vector2((_final_size.x / (graph_points.size())) * (point_index + 1), _final_size.y * 0.5)
-			var point_next: Vector2 = graph_points[point_index + 1]
-			var _offset: Vector2 = Vector2(1, y_scale)
-			var _final_point_1: Vector2 = graph_offset + _size_offset + point * _offset
-			var _final_point_2: Vector2 = graph_offset + _size_offset_next + point_next * _offset
-			draw_line(_final_point_1, _final_point_2, Color.GREEN, width, false)
+		var _offset: Vector2 = Vector2(1, y_scale)
+		for point_index in _point_length:
+			var _size_offset = Vector2((_final_size.x / (_point_length)) * point_index, _final_size.y * 0.5)
+			var point:float = graph_points[axis_index][point_index]
+			if point_index < _point_length - 1:
+				var _size_offset_next = Vector2((_final_size.x / (_point_length)) * (point_index + 1), _final_size.y * 0.5)
+				var point_next:float = graph_points[axis_index][point_index + 1]
+				var _final_point_1: Vector2 = graph_offset + _size_offset + Vector2(0.0, point) * _offset
+				var _final_point_2: Vector2 = graph_offset + _size_offset_next + Vector2(0.0, point_next) * _offset
+				draw_line(_final_point_1, _final_point_2, _point_color * Color(1,1,1, alpha), width, false)
 
 # Draws the graph info
 func _draw_graph_info() -> void:

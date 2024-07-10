@@ -3,6 +3,8 @@
 class_name ShakerComponent2D
 extends "res://addons/shaker/src/Vector2/ShakerBase2D.gd"
 
+## Allows you to apply shake effect to any 2D node according to position, rotation, scale
+
 enum ShakeAddMode {
 	add,
 	override
@@ -170,19 +172,23 @@ func stop_shake() -> void:
 
 # Immediately stops the shake effect
 func force_stop_shake() -> void:
-	set_progress(0.0)
-	_reset()
-	shake_finished.emit()
+	if is_playing || _fading_out:
+		set_progress(0.0)
+		_reset()
+		shake_finished.emit()
 
 # Starts the shake effect
 func play_shake() -> void:
 	if shakerPreset != null:
 		_initalize_target()
-		if randomize: _seed = randf_range(10000, 99999)
+		randomize_shake()
 		is_playing = !is_playing if Engine.is_editor_hint() else true
 		_fading_out = false
 		_initialize_timer_offset()
 		shake_started.emit()
+
+func randomize_shake() -> void:
+	_seed = randf_range(10000, 99999)
 
 func _initalize_target() -> void:
 	if !custom_target:
@@ -237,7 +243,7 @@ func get_custom_target() -> bool:
 	return custom_target
 
 func set_randomize(value: bool) -> void:
-	if custom_target:
+	if custom_target && Targets.size() > 1:
 		for index: int in Targets.size():
 			var target: Node2D = Targets[index]
 			var i = fmod(index, _last_position_shake.size())
@@ -248,6 +254,7 @@ func set_randomize(value: bool) -> void:
 		_last_rotation_shake.fill(_last_rotation_shake[0])
 		_last_scale_shake.fill(_last_scale_shake[0])
 	randomize = value
+	randomize_shake()
 
 func get_randomize() -> bool:
 	return randomize
