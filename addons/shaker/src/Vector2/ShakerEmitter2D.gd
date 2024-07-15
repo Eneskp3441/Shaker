@@ -20,7 +20,6 @@ extends "res://addons/shaker/src/Vector2/ShakerBase2D.gd"
 
 # Private variables
 var emitting: bool = false
-var _gizmo: EditorNode3DGizmo
 var _timer_offset: float = 0.0
 var _fading_out: bool = false
 var shake_offset_position: Vector2 = Vector2.ZERO
@@ -109,11 +108,6 @@ func play_shake() -> void:
 func _initialize_timer_offset() -> void:
 	if !(duration > 0): _timer_offset = 0x80000
 	else: _timer_offset = 0.0
-
-# Updates the gizmo
-func update_gizmo() -> void:
-	if _gizmo:
-		_gizmo._redraw()
 
 # Stops the shake effect with a fade-out
 func stop_shake() -> void:

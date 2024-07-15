@@ -20,7 +20,6 @@ extends "res://addons/shaker/src/Vector3/ShakerBase3D.gd"
 
 # Private variables
 var emitting: bool = false
-var _gizmo: EditorNode3DGizmo
 var _timer_offset: float = 0.0
 var _fading_out: bool = false
 var shake_offset_position: Vector3 = Vector3.ZERO
