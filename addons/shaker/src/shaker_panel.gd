@@ -1,5 +1,5 @@
 @tool
-extends Panel
+extends MarginContainer
 
 var _texture_button_play:Button = Button.new()
 var _texture_button_stop:Button = Button.new()
@@ -14,6 +14,10 @@ var button_width:float = 96;
 
 func _ready() -> void:
 	custom_minimum_size.y = 32;
+	add_theme_constant_override("margin_left",5)
+	add_theme_constant_override("margin_right",5)
+	add_theme_constant_override("margin_bottom",5)
+	add_theme_constant_override("margin_top",5)
 	add_child(hbox)
 	hbox.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT, Control.PRESET_MODE_KEEP_HEIGHT, 5)
 	hbox.alignment = BoxContainer.ALIGNMENT_CENTER;

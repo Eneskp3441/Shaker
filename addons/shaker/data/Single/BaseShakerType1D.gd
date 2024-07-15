@@ -42,5 +42,5 @@ func _calc_value(t: float, result: float) -> float:
 		result = 0.0;
 	else:
 		result = result * amplitude + offset
-		result *= (ease(t, fade_in) if fade_in > 0 else 1.0) * (ease(1.0 - t, fade_out) if fade_out > 0 else 1.0)
+		result *= (ease(t, fade_in) if fade_in > 0.0001 else 1.0) * (ease(1.0 - t, fade_out) if fade_out > 0.0001 else 1.0)
 	return result;

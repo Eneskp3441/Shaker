@@ -16,7 +16,7 @@ func _parse_category(object: Object, category: String) -> void:
 
 func _parse_begin(object: Object) -> void:
 	if object is ShakerComponent3D || object is ShakerComponent2D:
-		var _panel:Panel = SHAKER_PANEL.new()
+		var _panel:MarginContainer = SHAKER_PANEL.new()
 		_panel.Target = object;
 		_panel.set_anchors_preset(Control.PRESET_FULL_RECT)
 		add_custom_control(_panel)
