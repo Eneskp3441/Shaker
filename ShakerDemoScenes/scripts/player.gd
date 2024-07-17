@@ -7,7 +7,7 @@ const JUMP_VELOCITY = 6
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity") * 2
 @onready var camera_3d: Camera3D = $Camera3D
 @onready var shaker_component_3d:ShakerComponent3D = $ShakerComponent3D
-const HEAD_BOB_WALKING = preload("res://ShakerDemoScenes/HeadBobWalking.tres")
+var HEAD_BOB_WALKING = preload("res://ShakerDemoScenes/HeadBobWalking.tres")
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
