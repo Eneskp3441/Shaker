@@ -92,11 +92,11 @@ func _get_configuration_warnings() -> PackedStringArray:
 		return ["Parent must be ShakerComponent2D"]
 	var _ex:bool = false
 	for i in get_children():
-		if i is Area3D:
+		if i is Area2D:
 			_ex = true
 			break
 	if !_ex:
-		return ["ShakerReceiver3D needs Area3D to work"]
+		return ["ShakerReceiver2D needs Area2D to work"]
 	return []
 
 # Called when an area enters
@@ -141,3 +141,8 @@ class EmitterData:
 	
 	func _init(_emitter: ShakerEmitter2D) -> void:
 		self.emitter = _emitter
+func is_playing() -> bool:
+	for i:EmitterData in emitter_list:
+		return i.emitter.emitting
+	return false
+

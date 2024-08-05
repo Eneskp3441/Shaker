@@ -153,3 +153,7 @@ class EmitterData:
 	func _init(_emitter: ShakerEmitter3D) -> void:
 		self.emitter = _emitter
 
+func is_playing() -> bool:
+	for i:EmitterData in emitter_list:
+		return i.emitter.emitting
+	return false

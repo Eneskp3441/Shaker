@@ -76,7 +76,7 @@ func _initalize_prev_positions() -> void:
 # Called every frame
 func _process(delta: float) -> void:
 	if is_playing:
-		if shakerPreset != null || _external_shakes.size() > 0:
+		if shakerPreset != null || _external_shakes.size() > 0 || is_receiving_from_emitters():
 			if timer <= duration || duration == 0.0:
 				_progress_shake()
 				timer += delta * shake_speed
@@ -176,13 +176,12 @@ func force_stop_shake() -> void:
 
 # Starts the shake effect
 func play_shake() -> void:
-	if shakerPreset != null:
-		_initalize_target()
-		randomize_shake()
-		is_playing = !is_playing if Engine.is_editor_hint() else true
-		_fading_out = false
-		_initialize_timer_offset()
-		shake_started.emit()
+	_initalize_target()
+	randomize_shake()
+	is_playing = !is_playing if Engine.is_editor_hint() else true
+	_fading_out = false
+	_initialize_timer_offset()
+	shake_started.emit()
 
 func randomize_shake() -> void:
 	_seed = randf_range(10000, 99999)
@@ -267,3 +266,9 @@ class ExternalShake:
 	var fade_in:float = 0.25
 	var fade_out:float = 0.25
 	var mode:ShakeAddMode=ShakeAddMode.add
+
+func is_receiving_from_emitters() -> bool:
+	for _child in get_children():
+			if _child is ShakerReceiver3D:
+				return _child.is_playing()
+	return false
