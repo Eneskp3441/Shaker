@@ -207,6 +207,8 @@ func shake(shaker_preset:ShakerPreset2D, _mode:ShakeAddMode=ShakeAddMode.add, du
 	external_shake.fade_out = fade_out
 	external_shake.mode = _mode
 	_external_shakes.append(external_shake)
+	if Targets.is_empty():
+		_initalize_target()
 	is_playing = true
 
 # Validates property visibility

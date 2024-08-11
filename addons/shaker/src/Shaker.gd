@@ -6,8 +6,8 @@ func shake_by_preset(preset:ShakerPresetBase, node:Node, duration:float, speed:f
 	if (preset is ShakerPreset3D && not node is Node3D): assert(false, "ShakerPreset3D only works for Node3D type")
 	if preset is ShakerPreset3D:
 		var component:ShakerComponent3D = ShakerComponent3D.new() 
-		component.name = "ShakerComponent3D"
 		add_child(component)
+		component.name = "TEMP_ShakerComponent3D"
 		component.custom_target = true
 		component.intensity = intensity
 		component.Targets.append(node)
@@ -17,7 +17,6 @@ func shake_by_preset(preset:ShakerPresetBase, node:Node, duration:float, speed:f
 		component.fade_out = fade_out
 		component.shakerPreset = preset
 		component.shake_finished.connect(_on_shake_finished.bind(component))
-		
 		component.play_shake()
 	
 	elif preset is ShakerPreset2D:

@@ -95,6 +95,7 @@ func _progress_shake() -> void:
 	
 	_ease_in = ease((timer) /_final_duration, fade_in)
 	_ease_out = ease(1.0-(max((timer-_timer_offset), 0.0))/_final_duration, fade_out)
+
 	if (!(duration > 0) || _fading_out) && is_playing:
 		if _ease_out <= get_process_delta_time():
 			force_stop_shake()
@@ -208,6 +209,8 @@ func shake(shaker_preset:ShakerPreset3D, _mode:ShakeAddMode=ShakeAddMode.add, du
 	external_shake.fade_out = fade_out
 	external_shake.mode = _mode
 	_external_shakes.append(external_shake)
+	if Targets.is_empty():
+		_initalize_target()
 	is_playing = true
 
 # Validates property visibility
