@@ -152,6 +152,13 @@ func _progress_shake() -> void:
 		
 	for index: int in Targets.size():
 		var target: Node3D = Targets[index]
+		if !is_instance_valid(target):
+			Targets.remove_at(index)
+			index-=1
+			if Targets.size() <= 0:
+				shake_finished.emit()
+				break
+		
 		var _i: int = fmod(index, _shake_position.size())
 		target.position += -_last_position_shake[_i] + _shake_position[_i]
 		target.rotation += -_last_rotation_shake[_i] + _shake_rotation[_i]

@@ -159,6 +159,16 @@ func _progress_shake() -> void:
 	_ease_in = ease(timer/_final_duration, fade_in)
 	_ease_out = ease(1.0-(max((timer-_timer_offset), 0.0))/_final_duration, fade_out)
 	
+	# Check all targets
+	for i:int in Targets.size():
+		var target:Node = Targets[i]
+		if !is_instance_valid(target):
+				Targets.remove_at(i)
+				i -= 1
+				if Targets.size() <= 0:
+					shake_finished.emit()
+					break
+	
 	if (!(duration > 0) || _fading_out) && is_playing:
 		if _ease_out <= get_process_delta_time():
 			force_stop_shake()
@@ -166,6 +176,7 @@ func _progress_shake() -> void:
 	var _value_temp:Array[Dictionary] = []
 	for i in _count:
 		_value_temp.append({})
+	
 	for _index:int in _count:
 		var _randomized:float = (_seed * (float(_index+1) / Targets.size())) if randomize else 0.0
 		var target:Node = Targets[_index]
